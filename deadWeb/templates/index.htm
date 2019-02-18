@@ -18,9 +18,10 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/jquery.toast.min.css" />
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" /><link rel="stylesheet" href="/css/deaddrop.css" />
+    <link rel="stylesheet" href="/css/deaddrop.css" />
 
 
     <script>
@@ -32,99 +33,118 @@
 
 </head>
 <body>
+    <div class="particles" id="particles-bg" />
     <form>
         <div class="container">
-            <div class=" page-header">
-                
-                <h1>One Time Dead Drop</h1>
-                <p class="intro-text">Need to send some data securely? This is the place.</p>
-            </div>
-            <!-- end header -->
+            <div class="row">
+                <div class="col-xs-2 hidden-xs hidden-sm"></div>
 
-            <div id="MakeDrop">
-                <div class="arrow_box arrow_box_info">
-                    <p>Enter the message that you'd like to send to someone.</p>
-                </div>
-                <div class="panel-body">
-                    <textarea name="message" id="message" placeholder="Enter your message" class="form-control input-lg" rows="11"></textarea>
-                </div>
-                <button type="button" class="btn btn-lg btn-primary" onclick="setDrop()">Make the drop!</button>
-            </div>
-            <!-- end make your drop -->
+                <div class="col-xs-12 col-md-8">
+                    <div class="wrapper">
+                        <img class="sa-emblem" src="/images/sa-badge.svg" />
 
-            <div id="DropComplete">
-                <div class="alert-success arrow_box arrow_box_success">
-                    <h2>Drop made!</h2>
-                    <p>You need to copy and send the message below to the person you want to pick up this drop. Note, for added security, send the password separate from the link.</p>
-                </div>
-                <div class="panel-body">
-                    <div class="drop-complete">
-                        <p class="intro-text">
-                            Hi,<br />
-                            I'm sending you some secure information.<br />
-                        </p>
-                        <div class="well location-well">
-                            Location: <span id="url"></span><br /><br />        
-                            Password: <span id="pass"></span>
+                        <!-- end header -->
+
+                        <div id="MakeDrop">
+                            <div class="page-header text-center">
+                                <h1>Secret Sharing</h1>
+                                <p class="intro-text">Need to share data securely? Enter the message that you'd like to send to someone.</p>
+                            </div>
+                            <div class="panel-body">
+                                <textarea name="message" id="message" placeholder="Your message..." class="form-control input-lg" rows="11"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-lg btn-primary" onclick="setDrop()">Create a secret message</button>
+                            </div>
                         </div>
+                        <!-- end make your drop -->
 
-                        <div class="warning">
-                            <p>Warning!</p>
-                            <ul>
-                                <li>This drop will ONLY work once, so be careful with the password, and make sure to copy the data immediately.</li>
-                                <li>After you pick it up, the data will self destruct and this link won't work anymore.</li>
-                                <li>This link will only work for 24 hours, so please check shortly.</li>
-                            </ul>
+                        <div id="DropComplete">
+                            <div class="page-header text-center">
+                                <h1>Secret Sharing</h1>
+                            </div>
+                            <div class="alert-success">
+                                <h3>Drop made!</h3>
+                                <p>You need to copy and send the message below to the person you want to pick up this drop. Note, for added security, send the password separate from the link.</p>
+                            </div>
+                            <div class="panel-body">
+                                <div class="drop-complete">
+                                    <p class="intro-text">
+                                        Hi,<br />
+                                        I'm sending you some secure information.<br /><br />
+                                        Location: <span id="url"></span><br/>       
+                                        Password: <span id="pass"></span>
+                                    </p>
+
+                                    <div class="warning">
+                                        <p>Warning!</p>
+                                        <ul>
+                                            <li>This drop will ONLY work once, so be careful with the password, and make sure to copy the data immediately.</li>
+                                            <li>After you pick it up, the data will self destruct and this link won't work anymore.</li>
+                                            <li>This link will only work for 24 hours, so please check shortly.</li>
+                                        </ul>
+                                    </div>
+                                        
+                                </div>
+                                
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-lg btn-primary" onclick="window.location.assign(getHost())">Create another message</button>
+                            </div>
                         </div>
-                            
+                        <!-- end drop complete -->
+
+                        <div id="RetrieveDrop">
+                            <div class="page-header text-center">
+                                <h1>Secret Sharing</h1>
+                                <p class="intro-text">This will only work once!<br/> Clicking <strong>'Get the secret message'</strong> will delete the message permanently.</p>
+                            </div>
+                            <div class="panel-body">
+                                <input type="password" id="password" class="form-control input-lg" placeholder="Enter your password" size="25" />
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-lg btn-primary" onclick="getDrop()">Get the secret message</button>
+                            </div>
+                        </div>
+                        <!-- end retrieve your drop -->
+
+
+                        <div id="DisplayDrop">
+                            <div class="page-header text-center">
+                                <h1>Secret Sharing</h1>
+                            </div>
+                            <div class="alert-success">
+                                <h3>Success!</h3>
+                                <p>Your decrypted message is below. This message has been deleted, you will not be able to retrieve it again.</p>
+                            </div>
+                            <div class="panel-body">
+                                <pre id="decrypted" />
+                            </div>
+                        </div>
+                        <!-- end display dead drop -->
                     </div>
-                    
                 </div>
-                <button type="button" class="btn btn-lg btn-primary" onclick="window.location.assign(getHost())">Make another  Drop</button>
+
+                <div class="col-xs-2 hidden-xs hidden-sm"></div>
             </div>
-            <!-- end drop complete -->
-
-            <div id="RetrieveDrop">
-                <div class="arrow_box arrow_box_info">
-                    <h2>Enter the password</h2>
-                    <p>This will only work once! Clicking <strong>'Get The Drop'</strong> will delete the message permanently.</p>
-                </div>
-                <div class="panel-body">
-                    <input type="password" id="password" class="form-control input-lg" placeholder="Enter your password here" size="25" />
-                </div>
-                <button type="button" class="btn btn-lg btn-primary" onclick="getDrop()">Get The Drop</button>
-            </div>
-            <!-- end retrieve your drop -->
-
-
-            <div id="DisplayDrop">
-                <div class="alert-success arrow_box arrow_box_success">
-                    <h2>Success!</h2>
-                    <p>Your decrypted message is below. This message has been deleted, you will not be able to retrieve it again.</p>
-                </div>
-                <div class="panel-body">
-                    <pre id="decrypted" />
-                </div>
-            </div>
-            <!-- end display dead drop -->
-
         </div>
         <!-- end container -->
     </form>
 ..
-    <!-- Bootstrap core JavaScript
-================================================== -->
+    <!-- Bootstrap core JavaScript ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/js/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
     <script src="/js/sjcl.js"></script>
+    <script src="/js/particles.min.js"></script>
+    <script src="/js/jquery.toast.min.js"></script>
     <script>
       var s = document.createElement('script');
 
       var src = "/js/deaddrop.js?cacheBreak="+Math.floor((Math.random() * 1000000) + 1);
       s.setAttribute('src',src);
       document.body.appendChild( s );
+
     </script>
     <script src="/js/merseen.js"></script>
 </body>

@@ -17,7 +17,7 @@ function setDrop() {
 
     $.post("/drop", { data: text }, function (data) {
 
-        $("#MakeDrop").hide(300, function () {
+        $("#MakeDrop").hide(0, function () {
             var id = data.id;
             var url = buildUrl(id);
 
@@ -26,15 +26,23 @@ function setDrop() {
             $('#pickuplink').attr("href", url);
 
             $("#pass").text(pw);
-            $("#DropComplete").show(200);
+            $("#DropComplete").show(0);
 
         }
         );
 
     }).fail(function () {
 
-        alert("Something went wrong. Unable to create drop.");
-        window.location.assign(getHost());
+        $.toast({ 
+            heading : "<b>Oops...</b>",
+            text : "Something went wrong. Unable to create the message.", 
+            showHideTransition : 'slide',
+            allowToastClose : false,
+            hideAfter : 5000,
+            textAlign : 'left',
+            position : 'top-right'
+        });
+        //window.location.assign(getHost());
     });
 
     
@@ -62,15 +70,23 @@ function getDrop() {
             var plainText = symmetricDecrypt(JSON.stringify(data));
             $("#decrypted").text(plainText);
 
-            $("#RetrieveDrop").hide(300, function () {
-                $("#DisplayDrop").show(300);
+            $("#RetrieveDrop").hide(0, function () {
+                $("#DisplayDrop").show(0);
             });
         }
 
     }).fail(function () {
 
-        alert("Something went wrong. Unable to get drop.");
-        window.location.assign(getHost());
+        $.toast({ 
+            heading : "<b>Oops...</b>",
+            text : "Something went wrong. Unable to get the message.", 
+            showHideTransition : 'slide',
+            allowToastClose : false,
+            hideAfter : 5000,
+            textAlign : 'left',
+            position : 'top-right'
+        });
+        //window.location.assign(getHost());
         
     });
 }
@@ -129,7 +145,16 @@ function symmetricEncrypt() {
 
         return crypt;
     } catch (err) {
-        alert('Error encrypting data');
+        $.toast({ 
+            heading : "<b>Oops...</b>",
+            text : "Error encrypting data", 
+            showHideTransition : 'slide',
+            allowToastClose : false,
+            hideAfter : 5000,
+            textAlign : 'left',
+            position : 'top-right'
+        });
+        //alert('Error encrypting data');
         return false;
     }
 }
@@ -145,8 +170,16 @@ function symmetricDecrypt(data) {
         return sjcl.decrypt(pw, data);
 
     } catch (err) {
-        alert('Error decrypting data');
-        window.location.assign("/");
+        $.toast({ 
+            heading : "<b>Oops...</b>",
+            text : "Error decrypting data", 
+            showHideTransition : 'slide',
+            allowToastClose : false,
+            hideAfter : 5000,
+            textAlign : 'left',
+            position : 'top-right'
+        });
+        //window.location.assign("/");
         return false;
     }
 }
@@ -184,5 +217,59 @@ $(document).ready(function () {
     if (top != self) {
         top.location.assign("/");
     }
+
+    // Showing the particles background
+    particlesJS("particles-bg", {
+        particles: {
+            number: { value: 160, density: { enable: true, value_area: 800 } },
+            color: { value: ["#BD10E0","#B8E986","#50E3C2","#FFD300","#E86363"] },
+            shape: {
+                type: "circle",
+            },
+            opacity: {
+                value: 1,
+                random: true,
+                anim: { enable: true, speed: 1, opacity_min: 0, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: { enable: false, speed: 4, size_min: 0.3, sync: false }
+            },
+            line_linked: {
+                enable: false,
+                distance: 150,
+                color: "#ffffff",
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+                attract: { enable: false, rotateX: 600, rotateY: 600 }
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: false, mode: "bubble" },
+                onclick: { enable: false, mode: "repulse" },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 400, line_linked: { opacity: 1 } },
+                bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+                repulse: { distance: 400, duration: 0.4 },
+                push: { particles_nb: 4 },
+                remove: { particles_nb: 2 }
+            }
+        },
+        retina_detect: true
+    });
 
 });
