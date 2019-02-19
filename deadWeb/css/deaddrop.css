@@ -10,17 +10,6 @@ body {
     font: 16px/1.4 'Lato', Arial, Helvetica, sans-serif;
 }
 
-.logo_bar {
-    background-color: #333;
-}
-
-.logo {
-    padding: 0;
-    height: 34px;
-    width: auto;
-    margin: 2.25em 0 ;
-}
-
 .container { padding:0 1em; } 
 
 @media all and (min-width: 788px) {  
@@ -29,17 +18,9 @@ body {
 
 }
 
-
 .page-header {
     margin: auto auto 24px auto;
     border-bottom: none;
-}
-
-
-#footer {
-    margin: 72px auto;
-    border-top: solid 2px #ddd;
-    padding: 16px 0px 0px 0px;
 }
 
 #DropComplete, #DisplayDrop, #RetrieveDrop {
@@ -76,11 +57,9 @@ pre {
     border: none;
     margin: 0;
     border: 1px solid #eaeaea;
-    }
+}
 
-
-
-    pre, pre a { font-size: 15px; }
+pre, pre a { font-size: 15px; }
 
 .location-well {
     margin: 16px 0em 16px 0em;
@@ -95,59 +74,6 @@ pre {
     font-size: 16px;
     line-height: 1.4;
 }
-
-.arrow_box {
-    position: relative;
-    padding: 24px 24px 20px 24px;
-    margin: 1em 0em 0 0em;
-}
-
-    .arrow_box h2 {
-        margin: 0em;
-        font-size: 26px;
-    }
-
-     .arrow_box p {font-size: 20px;}
-
-    .arrow_box:after {
-        top: 100%;
-        left: 60px;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-    }
-
-    .arrow_box:after {
-        border-color: rgba(255, 255, 255, 0);
-        border-top-color: #ffffff;
-        border-width: 30px;
-        margin-left: -30px;
-    }
-
-
-.arrow_box_success {
-    background: #0ad1ae;
-    color: #fff;
-}
-
-    .arrow_box_success:after {
-        border-color: rgba(120, 120, 120, 0);
-        border-top-color: #0ad1ae;
-    }
-
-
-.arrow_box_info {
-    background: #666;
-    color: #fff;
-}
-
-    .arrow_box_info:after {
-        border-color: rgba(120, 120, 120, 0);
-        border-top-color: #666;
-    }
 
 .panel-body {
     padding: 16px 0;
@@ -182,12 +108,12 @@ textarea.input-lg { padding: 24px; }
     padding: 15px 20px;
     transition: all 0.2s ease-out;
 }
+
 .btn-primary:hover,
 .btn-primary:focus { 
     background: #E93E28;
     outline: none !important;
 }
-
 
 #demo {
     font-size: 20px;
@@ -202,9 +128,6 @@ textarea.input-lg { padding: 24px; }
  .collapse{display:none}
  .collapse.in{display:block}
  .collapsing{position:relative;height:0;overflow:hidden;-webkit-transition:height .35s ease;transition:height .35s ease}
-
-/*--------- Custom ----------------*/
-
 
 .particles {
     position: absolute;
