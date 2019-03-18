@@ -65,7 +65,7 @@
                             </div>
                             <div class="alert-success">
                                 <h3>Secret created!</h3>
-                                <p>Please copy and send the message below (or only the location and password) to the recipient of this secret. </p>
+                                <p>Please copy and send the message below (or only the location and access token) to the recipient of this secret. </p>
                             </div>
                             <div class="panel-body">
                                 <div class="drop-complete">
@@ -73,7 +73,7 @@
                                         Hi,<br />
                                         I'm sending you some secure information.<br /><br />
                                         Location: <span id="url"></span><br/>       
-                                        Password: <span id="pass"></span>
+                                        Access token: <span id="pass"></span>
                                     </p>
 
                                     <div class="warning">
@@ -81,7 +81,7 @@
                                         <ul>
                                             <li>This message will ONLY work once, so make sure to copy the data immediately.</li>
                                             <li>After you pick it up, the data will be removed and this link won't work anymore.</li>
-                                            <li>This link will only work for 24 hours, so please check shortly.</li>
+                                            <li>This link will only work for 1 week.</li>
                                         </ul>
                                     </div>
                                         
@@ -100,7 +100,7 @@
                                 <p class="intro-text">This will only work once! Clicking 'Get the secret message' will show you the message and delete it permanently.</p>
                             </div>
                             <div class="panel-body">
-                                <input type="password" id="password" class="form-control input-lg" placeholder="Enter your password" size="25" />
+                                <input type="password" id="password" class="form-control input-lg" placeholder="Enter your access token" size="25" />
                             </div>
                             <div class="text-center">
                                 <button type="button" class="btn btn-lg btn-primary" onclick="getDrop()">Get the secret message</button>
