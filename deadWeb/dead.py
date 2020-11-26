@@ -98,6 +98,13 @@ HANDLER = DropHandler(MongoClient(connectTimeoutMS=5000, serverSelectionTimeoutM
 
 APP = Flask(__name__)
 
+# Fix python3.7 issue icw current requirements.txt
+# It seems like deaddrop requires a flask version that uses
+# a deprecated function. Error message:
+# AttributeError: 'Request' object has no attribute 'is_xhr
+
+APP.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
+
 @APP.route("/")
 def index():
     """ just return the index template"""
